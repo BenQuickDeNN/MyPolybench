@@ -1,0 +1,417 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 19.0.2.187 Build 20190117
+
+Compiler options: -I. -I../../utilities -o jacobi-2d -O3 -DPOLYBENCH_DUMP_ARRAYS -DPOLYBENCH_USE_C99_PROTO -DPOLYBENCH_TIME -qopt-report5 -qopt-report-phase=vec -xCORE-AVX2
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at jacobi-2d.c(44,3) inlined into jacobi-2d.c(171,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at jacobi-2d.c(45,5) inlined into jacobi-2d.c(171,3)
+   <Peeled loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at jacobi-2d.c(45,5) inlined into jacobi-2d.c(171,3)
+      remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(47,2) ]
+      remark #15388: vectorization support: reference B[i][j] has aligned access   [ jacobi-2d.c(48,2) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 4
+      remark #15399: vectorization support: unroll factor set to 4
+      remark #15309: vectorization support: normalized vectorization overhead 0.046
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 72 
+      remark #15477: vector cost: 20.500 
+      remark #15478: estimated potential speedup: 3.460 
+      remark #15486: divides: 2 
+      remark #15487: type converts: 2 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at jacobi-2d.c(45,5) inlined into jacobi-2d.c(171,3)
+   <Remainder loop for vectorization>
+      remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(47,2) ]
+      remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(48,2) ]
+      remark #15381: vectorization support: unaligned access used inside loop body
+      remark #15305: vectorization support: vector length 4
+      remark #15309: vectorization support: normalized vectorization overhead 0.214
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15449: unmasked aligned unit stride stores: 1 
+      remark #15451: unmasked unaligned unit stride stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 72 
+      remark #15477: vector cost: 20.500 
+      remark #15478: estimated potential speedup: 3.460 
+      remark #15486: divides: 2 
+      remark #15487: type converts: 2 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at jacobi-2d.c(45,5) inlined into jacobi-2d.c(171,3)
+   <Remainder loop for vectorization>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at jacobi-2d.c(89,3) inlined into jacobi-2d.c(180,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at jacobi-2d.c(91,4) inlined into jacobi-2d.c(180,3)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at jacobi-2d.c(104,5) inlined into jacobi-2d.c(180,3)
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at jacobi-2d.c(105,6) inlined into jacobi-2d.c(180,3)
+         <Peeled loop for vectorization>
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(105,6) inlined into jacobi-2d.c(180,3)
+            remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(106,7) ]
+            remark #15388: vectorization support: reference A[i][j] has aligned access   [ jacobi-2d.c(106,36) ]
+            remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(106,46) ]
+            remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(106,58) ]
+            remark #15388: vectorization support: reference A[i+1][j] has aligned access   [ jacobi-2d.c(106,70) ]
+            remark #15388: vectorization support: reference A[i-1][j] has aligned access   [ jacobi-2d.c(106,82) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 4
+            remark #15399: vectorization support: unroll factor set to 4
+            remark #15309: vectorization support: normalized vectorization overhead 0.191
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 3 
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15451: unmasked unaligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 16 
+            remark #15477: vector cost: 4.250 
+            remark #15478: estimated potential speedup: 3.700 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(105,6) inlined into jacobi-2d.c(180,3)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(106,7) ]
+            remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(106,36) ]
+            remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(106,46) ]
+            remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(106,58) ]
+            remark #15389: vectorization support: reference A[i+1][j] has unaligned access   [ jacobi-2d.c(106,70) ]
+            remark #15389: vectorization support: reference A[i-1][j] has unaligned access   [ jacobi-2d.c(106,82) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 4
+            remark #15309: vectorization support: normalized vectorization overhead 1.400
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 3 
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15451: unmasked unaligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 16 
+            remark #15477: vector cost: 4.250 
+            remark #15478: estimated potential speedup: 3.700 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(105,6) inlined into jacobi-2d.c(180,3)
+         <Remainder loop for vectorization>
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(111,6) inlined into jacobi-2d.c(180,3)
+      <Peeled loop for vectorization>
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(111,6) inlined into jacobi-2d.c(180,3)
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(112,7) ]
+         remark #15388: vectorization support: reference A[i][j] has aligned access   [ jacobi-2d.c(112,36) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(112,46) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(112,58) ]
+         remark #15388: vectorization support: reference A[i+1][j] has aligned access   [ jacobi-2d.c(112,70) ]
+         remark #15388: vectorization support: reference A[i-1][j] has aligned access   [ jacobi-2d.c(112,82) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15309: vectorization support: normalized vectorization overhead 0.191
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(111,6) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(112,7) ]
+         remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(112,36) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(112,46) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(112,58) ]
+         remark #15389: vectorization support: reference A[i+1][j] has unaligned access   [ jacobi-2d.c(112,70) ]
+         remark #15389: vectorization support: reference A[i-1][j] has unaligned access   [ jacobi-2d.c(112,82) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15309: vectorization support: normalized vectorization overhead 1.400
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(111,6) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(115,5) inlined into jacobi-2d.c(180,3)
+         remark #15542: loop was not vectorized: inner loop was already vectorized
+
+         LOOP BEGIN at jacobi-2d.c(116,6) inlined into jacobi-2d.c(180,3)
+         <Peeled loop for vectorization>
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(116,6) inlined into jacobi-2d.c(180,3)
+            remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(117,7) ]
+            remark #15388: vectorization support: reference B[i][j] has aligned access   [ jacobi-2d.c(117,36) ]
+            remark #15389: vectorization support: reference B[i][j-1] has unaligned access   [ jacobi-2d.c(117,46) ]
+            remark #15389: vectorization support: reference B[i][j+1] has unaligned access   [ jacobi-2d.c(117,58) ]
+            remark #15388: vectorization support: reference B[i+1][j] has aligned access   [ jacobi-2d.c(117,70) ]
+            remark #15388: vectorization support: reference B[i-1][j] has aligned access   [ jacobi-2d.c(117,82) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 4
+            remark #15399: vectorization support: unroll factor set to 4
+            remark #15309: vectorization support: normalized vectorization overhead 0.191
+            remark #15300: LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 3 
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15451: unmasked unaligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 16 
+            remark #15477: vector cost: 4.250 
+            remark #15478: estimated potential speedup: 3.700 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(116,6) inlined into jacobi-2d.c(180,3)
+         <Remainder loop for vectorization>
+            remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(117,7) ]
+            remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(117,36) ]
+            remark #15389: vectorization support: reference B[i][j-1] has unaligned access   [ jacobi-2d.c(117,46) ]
+            remark #15389: vectorization support: reference B[i][j+1] has unaligned access   [ jacobi-2d.c(117,58) ]
+            remark #15389: vectorization support: reference B[i+1][j] has unaligned access   [ jacobi-2d.c(117,70) ]
+            remark #15389: vectorization support: reference B[i-1][j] has unaligned access   [ jacobi-2d.c(117,82) ]
+            remark #15381: vectorization support: unaligned access used inside loop body
+            remark #15305: vectorization support: vector length 4
+            remark #15309: vectorization support: normalized vectorization overhead 1.400
+            remark #15301: REMAINDER LOOP WAS VECTORIZED
+            remark #15442: entire loop may be executed in remainder
+            remark #15448: unmasked aligned unit stride loads: 3 
+            remark #15450: unmasked unaligned unit stride loads: 2 
+            remark #15451: unmasked unaligned unit stride stores: 1 
+            remark #15475: --- begin vector cost summary ---
+            remark #15476: scalar cost: 16 
+            remark #15477: vector cost: 4.250 
+            remark #15478: estimated potential speedup: 3.700 
+            remark #15488: --- end vector cost summary ---
+         LOOP END
+
+         LOOP BEGIN at jacobi-2d.c(116,6) inlined into jacobi-2d.c(180,3)
+         <Remainder loop for vectorization>
+         LOOP END
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(122,6) inlined into jacobi-2d.c(180,3)
+      <Peeled loop for vectorization>
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(122,6) inlined into jacobi-2d.c(180,3)
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(123,7) ]
+         remark #15388: vectorization support: reference A[i][j] has aligned access   [ jacobi-2d.c(123,36) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(123,46) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(123,58) ]
+         remark #15388: vectorization support: reference A[i+1][j] has aligned access   [ jacobi-2d.c(123,70) ]
+         remark #15388: vectorization support: reference A[i-1][j] has aligned access   [ jacobi-2d.c(123,82) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15309: vectorization support: normalized vectorization overhead 0.191
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(122,6) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(123,7) ]
+         remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(123,36) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(123,46) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(123,58) ]
+         remark #15389: vectorization support: reference A[i+1][j] has unaligned access   [ jacobi-2d.c(123,70) ]
+         remark #15389: vectorization support: reference A[i-1][j] has unaligned access   [ jacobi-2d.c(123,82) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15309: vectorization support: normalized vectorization overhead 1.400
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(122,6) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at jacobi-2d.c(135,2) inlined into jacobi-2d.c(180,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at jacobi-2d.c(137,7) inlined into jacobi-2d.c(180,3)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at jacobi-2d.c(138,2) inlined into jacobi-2d.c(180,3)
+      <Peeled loop for vectorization>
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(138,2) inlined into jacobi-2d.c(180,3)
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(139,4) ]
+         remark #15388: vectorization support: reference A[i][j] has aligned access   [ jacobi-2d.c(139,33) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(139,43) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(139,55) ]
+         remark #15388: vectorization support: reference A[i+1][j] has aligned access   [ jacobi-2d.c(139,67) ]
+         remark #15388: vectorization support: reference A[i-1][j] has aligned access   [ jacobi-2d.c(139,79) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15309: vectorization support: normalized vectorization overhead 0.191
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(138,2) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(139,4) ]
+         remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(139,33) ]
+         remark #15389: vectorization support: reference A[i][j-1] has unaligned access   [ jacobi-2d.c(139,43) ]
+         remark #15389: vectorization support: reference A[i][j+1] has unaligned access   [ jacobi-2d.c(139,55) ]
+         remark #15389: vectorization support: reference A[i+1][j] has unaligned access   [ jacobi-2d.c(139,67) ]
+         remark #15389: vectorization support: reference A[i-1][j] has unaligned access   [ jacobi-2d.c(139,79) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15309: vectorization support: normalized vectorization overhead 1.400
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(138,2) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at jacobi-2d.c(140,7) inlined into jacobi-2d.c(180,3)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at jacobi-2d.c(141,2) inlined into jacobi-2d.c(180,3)
+      <Peeled loop for vectorization>
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(141,2) inlined into jacobi-2d.c(180,3)
+         remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(142,4) ]
+         remark #15388: vectorization support: reference B[i][j] has aligned access   [ jacobi-2d.c(142,33) ]
+         remark #15389: vectorization support: reference B[i][j-1] has unaligned access   [ jacobi-2d.c(142,43) ]
+         remark #15389: vectorization support: reference B[i][j+1] has unaligned access   [ jacobi-2d.c(142,55) ]
+         remark #15388: vectorization support: reference B[i+1][j] has aligned access   [ jacobi-2d.c(142,67) ]
+         remark #15388: vectorization support: reference B[i-1][j] has aligned access   [ jacobi-2d.c(142,79) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15399: vectorization support: unroll factor set to 4
+         remark #15309: vectorization support: normalized vectorization overhead 0.191
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+         remark #15448: unmasked aligned unit stride loads: 3 
+         remark #15450: unmasked unaligned unit stride loads: 2 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 16 
+         remark #15477: vector cost: 4.250 
+         remark #15478: estimated potential speedup: 3.700 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(141,2) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+         remark #15389: vectorization support: reference A[i][j] has unaligned access   [ jacobi-2d.c(142,4) ]
+         remark #15389: vectorization support: reference B[i][j] has unaligned access   [ jacobi-2d.c(142,33) ]
+         remark #15389: vectorization support: reference B[i][j-1] has unaligned access   [ jacobi-2d.c(142,43) ]
+         remark #15389: vectorization support: reference B[i][j+1] has unaligned access   [ jacobi-2d.c(142,55) ]
+         remark #15389: vectorization support: reference B[i+1][j] has unaligned access   [ jacobi-2d.c(142,67) ]
+         remark #15389: vectorization support: reference B[i-1][j] has unaligned access   [ jacobi-2d.c(142,79) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15309: vectorization support: normalized vectorization overhead 1.400
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+         remark #15442: entire loop may be executed in remainder
+      LOOP END
+
+      LOOP BEGIN at jacobi-2d.c(141,2) inlined into jacobi-2d.c(180,3)
+      <Remainder loop for vectorization>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at jacobi-2d.c(64,3) inlined into jacobi-2d.c(190,3)
+   remark #15382: vectorization support: call to function fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ jacobi-2d.c(66,34) ]
+   remark #15382: vectorization support: call to function fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ jacobi-2d.c(67,7) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (66:34) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (67:7)
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (67:7) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (66:34)
+
+   LOOP BEGIN at jacobi-2d.c(65,5) inlined into jacobi-2d.c(190,3)
+      remark #15382: vectorization support: call to function fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ jacobi-2d.c(66,34) ]
+      remark #15382: vectorization support: call to function fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ jacobi-2d.c(67,7) ]
+      remark #15344: loop was not vectorized: vector dependence prevents vectorization
+      remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (66:34) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (67:7)
+      remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (67:7) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (66:34)
+   LOOP END
+LOOP END
+===========================================================================

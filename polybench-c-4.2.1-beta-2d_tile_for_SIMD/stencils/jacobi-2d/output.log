@@ -1,0 +1,15 @@
+sizeof data_type = 8
+TI=13
+duration = 13 us
+sizeof data_type = 8
+TI=43
+duration = 287 us
+sizeof data_type = 8
+TI=123
+duration = 6901 us
+sizeof data_type = 8
+TI=192
+duration = 2401760 us
+sizeof data_type = 8
+TI=192
+duration = 24676599 us

@@ -1,0 +1,142 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 19.0.2.187 Build 20190117
+
+Compiler options: -I. -I../../utilities -o jacobi-2d -O3 -DPOLYBENCH_DUMP_ARRAYS -DPOLYBENCH_USE_C99_PROTO -DPOLYBENCH_TIME -qopt-report5 -qopt-report-phase=vec -xCORE-AVX2
+
+Begin optimization report for: polybench_flush_cache()
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3)
+<Peeled loop for vectorization>
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3)
+   remark #15388: vectorization support: reference flush[i] has aligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.725
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference flush[i] has unaligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 2.167
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3)
+<Remainder loop for vectorization>
+LOOP END
+===========================================================================
+
+Begin optimization report for: polybench_prepare_instruments()
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(356,3)
+<Peeled loop for vectorization>
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(356,3)
+   remark #15388: vectorization support: reference flush[i] has aligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.725
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(356,3)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference flush[i] has unaligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 2.167
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(356,3)
+<Remainder loop for vectorization>
+LOOP END
+===========================================================================
+
+Begin optimization report for: polybench_timer_start()
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(366,3)
+<Peeled loop for vectorization>
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(366,3)
+   remark #15388: vectorization support: reference flush[i] has aligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15305: vectorization support: vector length 4
+   remark #15399: vectorization support: unroll factor set to 8
+   remark #15309: vectorization support: normalized vectorization overhead 0.725
+   remark #15300: LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(366,3)
+<Remainder loop for vectorization>
+   remark #15389: vectorization support: reference flush[i] has unaligned access   [ ../../utilities/polybench.c(122,12) ]
+   remark #15381: vectorization support: unaligned access used inside loop body
+   remark #15305: vectorization support: vector length 4
+   remark #15309: vectorization support: normalized vectorization overhead 2.167
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #15442: entire loop may be executed in remainder
+   remark #15448: unmasked aligned unit stride loads: 1 
+   remark #15475: --- begin vector cost summary ---
+   remark #15476: scalar cost: 5 
+   remark #15477: vector cost: 1.250 
+   remark #15478: estimated potential speedup: 3.990 
+   remark #15488: --- end vector cost summary ---
+LOOP END
+
+LOOP BEGIN at ../../utilities/polybench.c(121,3) inlined into ../../utilities/polybench.c(366,3)
+<Remainder loop for vectorization>
+LOOP END
+===========================================================================
