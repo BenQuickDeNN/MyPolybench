@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 /* Include polybench common header. */
 #include <polybench.h>
@@ -27,9 +28,10 @@
 
 /* Compute tile size for L1 data cache. */
 #define SIZE_L1_DCACHE 32768 // L1 data cache size (byte)
+#define SIZE_L2_CACHE 262144 // L2 cache size (byte)
 #define NUM_ARRAY 2 // the number of arrays referenced
-static const int TI = floor(SIZE_L1_DCACHE / (N * sizeof(DATA_TYPE) * NUM_ARRAY)); // tile size for I dimension
-static inline int min(int a, int b){return a<b?a:b;} // function to get minimun value
+int TI; // tile size
+int TI1; // real tile size
 
 /* Array initialization. */
 static
@@ -77,19 +79,67 @@ void kernel_jacobi_2d(int tsteps,
 			    DATA_TYPE POLYBENCH_2D(A,N,N,n,n),
 			    DATA_TYPE POLYBENCH_2D(B,N,N,n,n))
 {
-  int t, ii, i, j;
-
+  int t, ii, i1, i, j;
+  int I1; // index for rest part
+	const int end_i = _PB_N - 2;
+	const int end_ii = end_i - ((_PB_N - 1) % TI) + 1;	
 #pragma scop
-  for (t = 0; t < _PB_TSTEPS; t++)
+	if (TI > 1) // tiling is valuable only if tile size is larger than 1
+	{
+		for (t = 0; t < _PB_TSTEPS; t++)
+		{
+			for (ii = 1; ii < end_ii; ii += TI)
+			{
+				if(ii==1)
+				{
+					TI1 = TI;
+					i1 = 1;
+				}
+				else
+				{
+					TI1 = TI - 1;
+					i1 = ii + 1;
+				}
+				/* Compute tiles of array B */
+				for (i = i1; i < i1 + TI1; i++)
+					for (j = 1; j < _PB_N - 1; j++)
+						B[i][j] = SCALAR_VAL(0.2) * (A[i][j] + A[i][j-1] + A[i][1+j] + A[1+i][j] + A[i-1][j]);
+				/* Precompute right boundary points of array B */
+				i = i1 + TI1;
+				if (i < end_i)
+				{
+					for (j = 1; j < _PB_N - 1; j++)
+						B[i][j] = SCALAR_VAL(0.2) * (A[i][j] + A[i][j-1] + A[i][1+j] + A[1+i][j] + A[i-1][j]);
+				}
+				/* Compute tiles of array A */
+				for (i = i1; i < i1 + TI1; i++)
+					for (j = 1; j < _PB_N - 1; j++)
+						A[i][j] = SCALAR_VAL(0.2) * (B[i][j] + B[i][j-1] + B[i][1+j] + B[1+i][j] + B[i-1][j]);
+				/* Precompute right boundary points of array A */
+				i = i1 + TI1;
+				if (i < end_i)
+				{
+					for (j = 1; j < _PB_N - 1; j++)
+						B[i][j] = SCALAR_VAL(0.2) * (A[i][j] + A[i][j-1] + A[i][1+j] + A[1+i][j] + A[i-1][j]);
+				}
+				
+			}	
+		}
+		I1 = i + 1;
+	}
+	else
+	{
+		I1 = 1;
+	}
+	/* Compute the rest part without tiling */	
+	for (t = 0; t < _PB_TSTEPS; t++)
     {
-	for (ii = 1; ii < _PB_N - 1; ii += TI)
-      	for (i = ii; i < min(ii + TI, _PB_N); i++)
-			for (j = 1; j < _PB_N - 1; j++)
-	  			B[i][j] = SCALAR_VAL(0.2) * (A[i][j] + A[i][j-1] + A[i][1+j] + A[1+i][j] + A[i-1][j]);
-    for (ii = 1; ii < _PB_N - 1; ii += TI)
-      	for (i = ii; i < min(ii + TI, _PB_N); i++)
-			for (j = 1; j < _PB_N - 1; j++)
-	  			A[i][j] = SCALAR_VAL(0.2) * (B[i][j] + B[i][j-1] + B[i][1+j] + B[1+i][j] + B[i-1][j]);
+      for (i = I1; i < _PB_N - 1; i++)
+	for (j = 1; j < _PB_N - 1; j++)
+	  B[i][j] = SCALAR_VAL(0.2) * (A[i][j] + A[i][j-1] + A[i][1+j] + A[1+i][j] + A[i-1][j]);
+      for (i = I1; i < _PB_N - 1; i++)
+	for (j = 1; j < _PB_N - 1; j++)
+	  A[i][j] = SCALAR_VAL(0.2) * (B[i][j] + B[i][j-1] + B[i][1+j] + B[1+i][j] + B[i-1][j]);
     }
 #pragma endscop
 
@@ -98,6 +148,16 @@ void kernel_jacobi_2d(int tsteps,
 
 int main(int argc, char** argv)
 {
+	// TI = floor(SIZE_L1_DCACHE / (N * sizeof(DATA_TYPE) * NUM_ARRAY)); // try to fit tile size for L1 cache
+	// TI = TI>(N-3)?(N-3):TI; // TI should not be large than compute bound
+	// if (TI < 2)
+	TI = floor((SIZE_L1_DCACHE + SIZE_L2_CACHE) / (N * sizeof(DATA_TYPE) * NUM_ARRAY)); // try to fit tile size for both L1 and L2 caches
+	TI = TI>((N-3)/2)?floor((N-3)/2):TI; // TI should not be larger than half compute bound	
+	
+	printf("N = %d\r\n", N);
+  printf("tsteps = %d\r\n", TSTEPS);
+	printf("sizeof data_type = %d\r\n", sizeof(DATA_TYPE));
+	printf("TI=%d\r\n", TI); // print tile size
   /* Retrieve problem size. */
   int n = N;
   int tsteps = TSTEPS;
@@ -112,13 +172,18 @@ int main(int argc, char** argv)
 
   /* Start timer. */
   polybench_start_instruments;
-
+	/* Set up timer */
+  clock_t start, finish;
+  long duration;
+  start = clock();
   /* Run kernel. */
   kernel_jacobi_2d(tsteps, n, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B));
-
+	/* Stop timer */
+  finish = clock();
+  duration = (long)(finish - start);
   /* Stop and print timer. */
   polybench_stop_instruments;
-  polybench_print_instruments;
+  // polybench_print_instruments;
 
   /* Prevent dead-code elimination. All live-out data must be printed
      by the function call in argument. */
@@ -127,6 +192,6 @@ int main(int argc, char** argv)
   /* Be clean. */
   POLYBENCH_FREE_ARRAY(A);
   POLYBENCH_FREE_ARRAY(B);
-
+	printf("duration = %ld us\r\n", duration);
   return 0;
 }
